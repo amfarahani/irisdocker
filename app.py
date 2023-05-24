@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import numpy as np
+import os
 import pickle
 #import joblib
 app = Flask(__name__)
@@ -21,4 +22,6 @@ def predict():
     #print(pred)
     return render_template('index.html', predict=str(pred))
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = os.environ.get("PORT", 5000)  # Heroku will set the PORT environment variable for web traffic
+    app.run(debug=False, host="0.0.0.0", port=port)
+
